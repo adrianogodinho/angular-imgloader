@@ -1,0 +1,15 @@
+/* app css stylesheet */
+
+.test-content {
+  width: 450px;
+}
+
+.test-card {
+  width: 200px;
+}
+
+il-img {
+    width: 80px;
+    height: 60px;
+    margin: 5px;
+}

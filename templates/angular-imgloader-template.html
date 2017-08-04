@@ -1,0 +1,3 @@
+<img ng-src="{{actualImageSrc}}"            ng-show="state === 'LOADED'"  class="il-image-loaded"/>
+<div ng-include="errorPlaceholderTemplate"  ng-show="state === 'ERROR'"   class="il-error-template"></div>
+<div ng-include="placeholderTemplate"       ng-show="state === 'LOADING'" class="il-progress-template"></div>

@@ -1,0 +1,16 @@
+{
+  "name": "angular-imgloader",
+  "description": "Component used to present an image placeholder while the image is loading. It uses image cache to cache images and speedup loading",
+  "version": "0.0.1",
+  "homepage": "https://dev.godinho.eng.br",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "angular": "~1.5.0",
+    "angular-route": "~1.5.0",
+    "angular-loader": "~1.5.0",
+    "angular-mocks": "~1.5.0",
+    "html5-boilerplate": "^5.3.0",
+    "angular-imgcache": "angular-imgcache.js#^1.1.0"
+  }
+}
