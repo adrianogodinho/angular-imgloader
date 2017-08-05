@@ -11,13 +11,61 @@
 </head>
 <body ng-app='example' ng-controller="Example" flex layout="column" ng-cloak>
 
-  <il-img il-src="item.imgSrc" il-min-time="50000" ng-repeat="item in model" alt="{{item.text}}"></il-img>
+  <section class="il-example" ng-cloak>
 
-  <il-img il-src="item.imgSrc" il-min-time="5000"
-          il-placeholder-template="'../default_placeholders/square-placeholder-template.html'"
-          ng-repeat="item in model" alt="{{item.text}}"></il-img>
+      <div class="il-example-header" ng-click="example1=!example1">
+          <label>Image Loader placeholder per image</label>
+      </div>
+
+      <div class="il-example-body" ng-show="example1">
+
+          <il-img il-src="item.imgSrc"
+                  il-min-time="item.loadTime"
+                  il-placeholder-template="'../default_placeholders/square-placeholder-template.html'"
+                  ng-repeat="item in exe1.images" alt="{{item.text}}"></il-img>
+      </div>
+
+
+  </section>
+
+  <section class="il-example" ng-cloak>
+
+      <div class="il-example-header" ng-click="example2=!example2">
+          <label>Image Loader placeholder for an image grid</label>
+      </div>
+
+      <div class="il-example-body" ng-show="example2">
+
+          <div style="position: relative">
+              <div class="il-grid">
+                  <il-img il-src="item.imgSrc"
+                          il-onload="onImgLoaded"
+                          il-min-time="item.loadTime"
+                          il-no-placeholder="true"
+                          ng-repeat="item in exe2.images" alt="{{item.text}}"></il-img>
+              </div>
+
+              <div class="il-grid-placeholder fade-out" ng-hide="exe2.all_loaded">
+                  <img ng-repeat="img in exe2.images" ng-src="viva_placeholder.png"/>
+              </div>
+
+              <div>
+                  {{ exe2.imgLoaded }} / {{ exe2.images.length }}
+              </div>
+
+          </div>
+
+          <div class="log">
+              Log:
+              <p ng-repeat="entry in exe2.log track by $index">{{ entry }}</p>
+          </div>
+      </div>
+
+  </section>
+
 
   <script src="../bower_components/angular/angular.js"></script>
+  <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
   <script src="../bower_components/imgcache.js/js/imgcache.js"></script>
   <script src="../bower_components/angular-imgcache/angular-imgcache.js"></script>
   <script src="../js/angular-imgloader.js"></script>

@@ -21,10 +21,19 @@ angular.module('angular-imgloader', [])
 
         var _scope = scope;
 
+        var _fireLoadedEvent = function (state, url, err) {
+            if(angular.isDefined(_scope.onloaded) && angular.isFunction(_scope.onloaded)) {
+                _scope.onloaded(state, url, err);
+            }
+        };
+
         var _onLoadError = function (err) {
             _scope.$apply(function () {
+
                 $log.log(err);
                 _scope.state = "ERROR";
+
+                _fireLoadedEvent(_scope.state, _scope.imgSrc, err);
             });
         };
 
@@ -34,6 +43,8 @@ angular.module('angular-imgloader', [])
                 _scope.$apply(function () {
                     _scope.actualImageSrc = cachedUrl;
                     _scope.state = "LOADED";
+
+                    _fireLoadedEvent(_scope.state, url, '');
                 });
             };
 
@@ -77,6 +88,17 @@ angular.module('angular-imgloader', [])
         };
 
         var _checkPlaceholders = function () {
+
+            var noPlaceholder = false;
+
+            if(angular.isDefined(_scope.ignorePlaceholder)) {
+                noPlaceholder =  _scope.ignorePlaceholder;
+            }
+
+            if(noPlaceholder) {
+                return;
+            }
+
             if(angular.isUndefined(_scope.placeholderSrc) || _scope.placeholderSrc === "" || _scope.placeholderSrc == null) {
                 _scope.placeholderSrc = LOAD_PLACEHOLDER_IMAGE;
             }
@@ -131,7 +153,8 @@ angular.module('angular-imgloader', [])
             placeholderTemplate: "=?ilPlaceholderTemplate",
             errorPlaceholderSrc: "=?ilErrorPlaceholderSrc",
             errorPlaceholderTemplate: "=?ilErrorPlaceholderTemplate",
-            minLoadingTime: "=?ilMinTime"
+            minLoadingTime: "=?ilMinTime",
+            ignorePlaceholder: "=?ilNoPlacehoder"
         },
 
         //TODO use grunt-html2js
@@ -146,6 +169,5 @@ angular.module('angular-imgloader', [])
             });
         }
     }
-
 });
 
