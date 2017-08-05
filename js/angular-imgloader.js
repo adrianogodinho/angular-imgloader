@@ -1,8 +1,21 @@
 'use strict';
 
-angular.module('angular-imgloader', [])
+var scripts = document.getElementsByTagName("script");
+var currentScriptPath = scripts[scripts.length-1].src.replace('js/angular-imgloader.js','');
 
+angular.module('angular-imgloader', [])
 .directive("ilImg", function ($log, $timeout, ImgCache) {
+
+    var getAppPath = function (modulePath) {
+        return currentScriptPath + modulePath;
+    };
+
+    var TEMPLATE_PATH = getAppPath('templates/angular-imgloader-template.html');
+    var LOAD_PLACEHOLDER_IMAGE = getAppPath("default_placeholders/image_placeholder_spinning.gif");
+    var LOAD_PLACEHOLDER_TEMPLATE = getAppPath("default_placeholders/default-placeholder-template.html");
+    var ERROR_PLACEHOLDER_IMAGE = getAppPath("default_placeholders/image_error_placeholder.svg");
+    var ERROR_PLACEHOLDER_TEMPLATE = getAppPath("default_placeholders/default-error-placeholder-template.html");
+    var ERROR_PLACEHOLDER_SVG_TEMPLATE = getAppPath("default_placeholders/default-error-placeholder-template-svg.html");
 
     var ImageLoader = function (scope) {
 
@@ -65,23 +78,23 @@ angular.module('angular-imgloader', [])
 
         var _checkPlaceholders = function () {
             if(angular.isUndefined(_scope.placeholderSrc) || _scope.placeholderSrc === "" || _scope.placeholderSrc == null) {
-                _scope.placeholderSrc = "../default_placeholders/image_placeholder_spinning.gif";
+                _scope.placeholderSrc = LOAD_PLACEHOLDER_IMAGE;
             }
 
             if(angular.isUndefined(_scope.placeholderTemplate) || _scope.placeholderTemplate === "" || _scope.placeholderTemplate == null) {
-                _scope.placeholderTemplate = "../default_placeholders/default-placeholder-template.html";
+                _scope.placeholderTemplate = LOAD_PLACEHOLDER_TEMPLATE;
             }
 
             if(angular.isUndefined(_scope.errorPlaceholderSrc) || _scope.errorPlaceholderSrc === "" || _scope.errorPlaceholderSrc == null) {
-                _scope.errorPlaceholderSrc = "../default_placeholders/image_error_placeholder.svg";
+                _scope.errorPlaceholderSrc = ERROR_PLACEHOLDER_IMAGE;
             }
 
             if(angular.isUndefined(_scope.errorPlaceholderTemplate) || _scope.errorPlaceholderTemplate === "" || _scope.errorPlaceholderTemplate == null) {
 
                 if(_scope.errorPlaceholderSrc.endsWith(".svg")) {
-                    _scope.errorPlaceholderTemplate = "../default_placeholders/default-error-placeholder-template-svg.html";
+                    _scope.errorPlaceholderTemplate = ERROR_PLACEHOLDER_SVG_TEMPLATE;
                 } else {
-                    _scope.errorPlaceholderTemplate = "../default_placeholders/default-error-placeholder-template.html";
+                    _scope.errorPlaceholderTemplate = ERROR_PLACEHOLDER_TEMPLATE;
                 }
 
             }
@@ -109,7 +122,6 @@ angular.module('angular-imgloader', [])
 
     };
 
-
     return {
         restrict: 'E',
         scope: {
@@ -122,7 +134,8 @@ angular.module('angular-imgloader', [])
             minLoadingTime: "=?ilMinTime"
         },
 
-        templateUrl: '../templates/angular-imgloader-template.html',
+        //TODO use grunt-html2js
+        templateUrl: TEMPLATE_PATH,
 
         link: function (scope, element, attrs) {
 
