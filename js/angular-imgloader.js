@@ -60,8 +60,8 @@ angular.module('angular-imgloader', [])
             ImgCache.getCachedFileURL(imageUrl, _displayImage, _onLoadError);
         };
 
-        var _downloadImage = function (scope, imageUrl) {
-            ImgCache.cacheFile(imageUrl, _displayImage, _onLoadError);
+        var _downloadImage = function (imageUrl) {
+            ImgCache.cacheFile(imageUrl, _getImageFromCache, _onLoadError);
         };
 
         var _updateImage = function(imageUrl) {
@@ -69,11 +69,15 @@ angular.module('angular-imgloader', [])
             _scope.state = "LOADING";
 
             ImgCache.isCached(imageUrl,
-                //If image is cached
-                _getImageFromCache,
-
-                //If image is not cached
-                _downloadImage
+                function (path, success) {
+                    if(success) {
+                        //If image is cached
+                        _getImageFromCache(path);
+                    } else{
+                        //If image is not cached
+                        _downloadImage(imageUrl);
+                    }
+                }
             );
         };
 

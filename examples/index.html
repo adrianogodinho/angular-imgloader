@@ -38,26 +38,32 @@
 
           <div style="position: relative">
               <div class="il-grid">
-                  <il-img il-src="item.imgSrc"
-                          il-onload="onImgLoaded"
-                          il-min-time="item.loadTime"
-                          il-no-placeholder="true"
-                          ng-repeat="item in exe2.images" alt="{{item.text}}"></il-img>
+                  <div ng-repeat="item in exe2.images" class="il-card">
+                      <il-img il-src="item.imgSrc"
+                              il-onload="onImgLoaded"
+                              il-min-time="item.loadTime"
+                              il-no-placeholder="true"
+                              alt="{{item.text}}"></il-img>
+
+                      <label>{{ item.text }}</label>
+                  </div>
+
               </div>
 
-              <div class="il-grid-placeholder fade-out" ng-hide="exe2.all_loaded">
-                  <img ng-repeat="img in exe2.images" ng-src="viva_placeholder.png"/>
-              </div>
-
-              <div>
-                  {{ exe2.imgLoaded }} / {{ exe2.images.length }}
+              <div class="il-grid-placeholder fade-out" style="width: 100%; height: 100%" ng-hide="exe2.all_loaded">
               </div>
 
           </div>
 
           <div class="log">
+
+              <div>
+                  {{ exe2.imgLoaded }} / {{ exe2.images.length }}
+              </div>
+
               Log:
               <p ng-repeat="entry in exe2.log track by $index">{{ entry }}</p>
+
           </div>
       </div>
 

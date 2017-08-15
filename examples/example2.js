@@ -3,40 +3,21 @@
 // Declare app level module which depends on views, and components
 angular.module('example', ['ngAnimate', 'ImgCache', 'angular-imgloader'])
 
-.controller("Example", function ($scope, $q) {
+.controller("Example2", function ($scope, $q) {
 
-    $scope.example1 = false;
     $scope.example2 = true;
-
-    var Example1 = function () {
-
-        $scope.exe1 = {
-            images: [
-                    {imgSrc: 'https://storage.googleapis.com/vivamais-images/1499631515873', text: "Test 1", loadTime : 2000},
-                    {imgSrc: 'https://storage.googleapis.com/vivamais-images/1499631521595', text: "Test 2", loadTime : 200},
-                    {imgSrc: 'https://storage.googleapis.com/vivamais-images/1499631519467', text: "Test 3", loadTime : 3000},
-                    {imgSrc: 'https://storage.googleapis.com/vivamais-images/1499611149844', text: "Test 4", loadTime : 0},
-                    {imgSrc: 'https://anywhare.com.br', text: "Test 5"},
-                    {imgSrc: 'https://anywhare.com.br', text: "Test 6"}
-                ]
-         };
-
-    };
 
     var Example2 = function () {
 
         var exe2 = {
             images : [
-                    { imgSrc : 'https://storage.googleapis.com/vivamais-images/1499631515873',text : "Abacaxi", loadTime : 200},
-                    { imgSrc : 'https://storage.googleapis.com/vivamais-images/1499631521595',text : "Agrião",  loadTime : 200},
+                    { imgSrc : 'https://storage.googleapis.com/vivamais-images/1499631515873',text : "Abacaxi", loadTime : 2000},
+                    { imgSrc : 'https://storage.googleapis.com/vivamais-images/1499631521595',text : "Agrião", loadTime : 200},
                     { imgSrc : 'https://storage.googleapis.com/vivamais-images/1499631519467',text : "Acerola", loadTime : 300},
-                    { imgSrc : 'https://storage.googleapis.com/vivamais-images/1499611149844',text : "Cereja",  loadTime : 200},
-                    { imgSrc : 'https://storage.googleapis.com/vivamais-images/1499631555546',text : "Test 5",  loadTime : 200},
-                    { imgSrc : 'https://storage.googleapis.com/vivamais-images/1499609974994',text : "Test 6",  loadTime : 200},
-                    { imgSrc : 'https://storage.googleapis.com/vivamais-images/1499631582264',text : "Test 7",  loadTime : 200},
-                    { imgSrc : 'https://storage.googleapis.com/vivamais-images/1499631582264',text : "Test 7",  loadTime : 200},
-                    { imgSrc : 'https://anywhare.com.br',text : "Test 5"},
-                    { imgSrc : 'https://anywhare.com.br',text : "Test 6"}
+                    { imgSrc : 'https://storage.googleapis.com/vivamais-images/1499611149844',text : "Test 4", loadTime : 200},
+                    { imgSrc : 'https://storage.googleapis.com/vivamais-images/1499631555546',text : "Test 5", loadTime : 200},
+                    { imgSrc : 'https://storage.googleapis.com/vivamais-images/1499609974994',text : "Test 6", loadTime : 200},
+                    { imgSrc : 'https://storage.googleapis.com/vivamais-images/1499631582264',text : "Test 7", loadTime : 200}
                 ],
             imgLoaded: 0,
             log: [],
@@ -99,7 +80,6 @@ angular.module('example', ['ngAnimate', 'ImgCache', 'angular-imgloader'])
         });
     };
 
-    Example1();
     Example2();
 
 })
