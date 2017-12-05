@@ -61,12 +61,12 @@ angular.module('angular-imgloader', [])
         };
 
         var _downloadImage = function (imageUrl) {
-            ImgCache.cacheFile(
-                imageUrl,
-                function(cacheUrl) {
-                    _displayImage(imageUrl, cacheUrl);
-                },
-                _onLoadError);
+
+            var cacheFileCallback = function(cacheUrl) {
+                _getImageFromCache(imageUrl, cacheUrl)
+            };
+
+            ImgCache.cacheFile(imageUrl, cacheFileCallback, _onLoadError);
         };
 
         var _updateImage = function(imageUrl) {
